@@ -6,7 +6,7 @@ plugins {
 android {
     namespace = "io.github.cs2026g1.mdds"
     compileSdk {
-        version = release(36) {
+        version = release(37) {
             minorApiLevel = 1
         }
     }
@@ -14,7 +14,7 @@ android {
     defaultConfig {
         applicationId = "io.github.cs2026g1.mdds"
         minSdk = 24
-        targetSdk = 36
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -48,6 +48,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("org.json:json:20250517")
     testImplementation(libs.junit)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
