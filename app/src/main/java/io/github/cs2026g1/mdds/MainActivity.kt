@@ -1,4 +1,5 @@
 package io.github.cs2026g1.mdds
+import io.github.cs2026g1.mdds.modelmanager.ModelManager
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -15,6 +16,7 @@ import io.github.cs2026g1.mdds.ui.theme.MDDSTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
@@ -27,6 +29,7 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+        ModelManager(this).checkLatest()
     }
 }
 
