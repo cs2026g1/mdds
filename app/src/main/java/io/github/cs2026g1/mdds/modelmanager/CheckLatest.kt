@@ -15,7 +15,7 @@ class CheckLatest {
                 }
                 val responseBody = response.body?.string()
 
-                if (responseBody == null) {
+                if(responseBody == null) {
                     return null
                 }
 
