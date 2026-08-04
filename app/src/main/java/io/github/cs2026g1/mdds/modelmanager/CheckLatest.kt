@@ -10,17 +10,13 @@ class CheckLatest {
         val request = Request.Builder().url(Config.LATEST_RELEASE_API)
             .header("User-Agent", "mdds-app")
             .header("Accept", "application/vnd.github+json")
-            .build() // This is necessary else github will reject our request.
+            .build() // This is necessary else GitHub will reject our request.
         return try {
             client.newCall(request).execute().use { response ->
                 if (!response.isSuccessful) {
                     return null
                 }
-                val responseBody = response.body?.string()
-
-                if(responseBody == null) {
-                    return null
-                }
+                val responseBody = response.body?.string() ?: return null
 
                 val json = JSONObject(responseBody)
                 val version = json.getString("tag_name")
