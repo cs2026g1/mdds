@@ -7,7 +7,10 @@ import org.json.JSONObject
 class CheckLatest {
     private val client = OkHttpClient()
     fun check() : ReleaseInfo? {
-        val request = Request.Builder().url(Config.LATEST_RELEASE_API).build()
+        val request = Request.Builder().url(Config.LATEST_RELEASE_API)
+            .header("User-Agent", "mdds-app")
+            .header("Accept", "application/vnd.github+json")
+            .build() // This is necessary else github will reject our request.
         return try {
             client.newCall(request).execute().use { response ->
                 if (!response.isSuccessful) {
