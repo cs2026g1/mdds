@@ -29,6 +29,24 @@ object ModelFileManager {
         }
         return digest.digest().joinToString("") {"%02x".format(it)}
     }
+    fun isModelIntact(context: Context): Boolean {
+        val file = getModelFile(context)
+        if(file.exists() || file.length() == 0L){
+            return false
+        }
+        val storedHash = Prefs.getModelHash(context) ?: return false
+        return try{
+            sha256(file) == storedHash
+        }
+        catch (e: Exception){
+            false
+        }
+    }
+    fun deleteModel(context: Context){
+        getModelFile(context).delete()
+        Prefs.clearModelHash(context)
+    }
+
 
 
 }
