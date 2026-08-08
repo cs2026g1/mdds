@@ -66,4 +66,23 @@ object Downloader {
             DownloadResult.Failure(e.message ?: "Network error")
         }
     }
+    fun commit(context: Context, tmpFile: File, hash: String, version: String): Boolean {
+        val modelFile = ModelFileManager.getModelFile(context)
+        return try{
+            tmpFile.copyTo(modelFile, overwrite = true)
+            tmpFile.delete()
+
+            if(modelFile.exists() && modelFile.length() > 0) {
+                Prefs.setModelHash(context, hash, version)
+                true
+            }
+            else{
+                false
+            }
+        }
+        catch (e: Exception) {
+            false
+        }
+
+    }
 }
