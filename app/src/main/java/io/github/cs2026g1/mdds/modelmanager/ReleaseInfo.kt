@@ -4,7 +4,8 @@ data class ReleaseInfo (
     val version: String,
     val name: String,
     val downloadUrl: String?, // can be null
-    val body: String
+    val body: String,
+    val expectedSha256: String?
 
 
 )

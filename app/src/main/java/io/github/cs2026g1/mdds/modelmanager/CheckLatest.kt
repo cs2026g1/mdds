@@ -24,19 +24,21 @@ class CheckLatest {
                 val body = json.getString("body")
 
                 var downloadUrl: String? = null
+                var expectedSha256: String? = null
                 val assets = json.getJSONArray("assets")
                 if (assets.length() > 0) {
 
                     val firstAsset = assets.getJSONObject(0)
-
-                    downloadUrl =
-                        firstAsset.getString("browser_download_url")
+                    downloadUrl = firstAsset.getString("browser_download_url")
+                    val digest = firstAsset.optString("digest", null)
+                    expectedSha256 = digest?.removePrefix("sha256:")
                 }
                 ReleaseInfo(
                     version = version,
                     name = releaseName,
                     downloadUrl = downloadUrl,
-                    body = body
+                    body = body,
+                    expectedSha256 = expectedSha256
                 )
 
             }
